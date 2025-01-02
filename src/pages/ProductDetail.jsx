@@ -9,25 +9,6 @@ const ProductDetail = () => {
   // oldName : newName
   const { data: product, loading, error } = useFetch(API);
 
-  const handleAddToCart = (product) => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const index = cart.findIndex((item) => item.id === product.id);
-  
-      // if found, increase quantity
-      if (index > -1) {
-        cart[index].quantity += 1;
-      } else {
-        cart.push({ ...product, quantity: 1 });
-      }
-  
-      localStorage.setItem("cart", JSON.stringify(cart));
-      notifications.show({
-        title: "cart Updated",
-        message: `${product.title} has been added to your cart`,
-        color: "green",
-      });
-    };
-
   if (loading) return <p> Loading ⏳...</p>;
   if (error) return <p>Error: {error}</p>;
 
